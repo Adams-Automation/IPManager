@@ -1,11 +1,12 @@
-﻿using NetworkInterfaceLibrary;
-using NetworkInterfaceLibrary.Models;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Controls;
-using System.Management;
-using System.Diagnostics;
+
+using NetworkInterfaceLibrary;
+using NetworkInterfaceLibrary.Models;
+using DatabaseLibrary.Models;
+using DatabaseLibrary;
 
 namespace IPManagerUI;
 
@@ -58,7 +59,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     #endregion
 
-    #region Visibility Variables
+    #region User Information Variables
 
     private string _ProcessInfo = "Test.";
 
@@ -71,20 +72,29 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         } 
     }
 
-    private Visibility _ProcessInfoVisibility = Visibility.Hidden;
+    #endregion
 
-    public Visibility ProcessInfoVisibility { 
-        get { return _ProcessInfoVisibility; }
-        set
-        {
-            _ProcessInfoVisibility |= value;
-            OnPropertyChanged(nameof(ProcessInfoVisibility));
-        } 
+    #region Database Variables
+
+    private List<IPv4Database> _IPList;
+
+    public List<IPv4Database> IPList
+    {
+        get { return _IPList; }
+        set 
+        { 
+            _IPList = value; 
+            OnPropertyChanged(nameof(IPList));
+        }
     }
 
+    public IPv4Database? SelectedIP { get; set; }
+
     #endregion
 
     #endregion
+
+    #region Interfaces
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -93,22 +103,32 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public MainWindow()
+    private IDatabase _Database;
+
+    #endregion
+
+    public MainWindow(IDatabase database)
     {
         InitializeComponent();
-        DataContext = this;
+
+        //Set interfaces
+        _Database = database;
+
+        //Populate variables
         NICList = NetworkHelper.GetAllNetworkInterfaces();
         SelectedNic = NICList.FirstOrDefault()!;
-
         IPv4Settings = NetworkHelper.GetIPv4Settings(SelectedNic);
+        IPList = _Database.GetAllIPs();
 
+        //Connect event
         NetworkChange.NetworkAddressChanged += new
         NetworkAddressChangedEventHandler(AddressChangedCallback);
     }
 
-    public async void AddressChangedCallback(object? sender, EventArgs e)
+    #region Private methods
+
+    private async void AddressChangedCallback(object? sender, EventArgs e)
     {
-        ProcessInfoVisibility = Visibility.Visible;
         ProcessInfo = "Reading new data ...";
 
         await Task.Run(() =>
@@ -130,7 +150,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         ProcessInfo = "Done.";
     }
 
-    public void NetworkAdaptorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void NetworkAdaptorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         ProcessInfo = "Selecting interface.";
 
@@ -149,15 +169,26 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         ProcessInfo = "Done.";
     }
 
+    #endregion
+
+    #region Network Commands
+
     public async void setIPAddres_click(object sender, EventArgs e)
     {
         ProcessInfo = "Setting IP Address.";
         if (SelectedNic != null)
         {
-            await Task.Run(() =>
+            if(SelectedIP != null)
             {
-                NetworkHelper.SetIpSettings(SelectedNic.Name, "12.43.56.98", "255.255.255.0", "12.43.56.1");
-            });
+                await Task.Run(() =>
+                {
+                    NetworkHelper.SetIpSettings(SelectedNic.Name, SelectedIP.IP, SelectedIP.SubnetMask, SelectedIP.DefaultGateway);
+                });
+            }
+            else
+            {
+                MessageBox.Show("Please select an IP from the list.", "Error");
+            }
         }
         else
         {
@@ -182,4 +213,25 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         }
         ProcessInfo = "Done.";
     }
+
+    #endregion
+
+    #region Database Commands
+
+    private void AddNewIPButton_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void EditIPButton_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void DeleteIPButton_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    #endregion
 }

@@ -2,21 +2,25 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
+using NetworkInterfaceLibrary.Models;
+using DatabaseLibrary.Models;
 
-namespace SyntaxCheckerDatabaseLibrary;
+namespace DatabaseLibrary;
 
-public class Database
+public class Database : IDatabase
 {
     private ILogger<Database>? Logger;
 
     public string DatabasePath { get; set; }
+
+    #region Constructors
 
     public Database(IConfiguration configuration)
     {
         string? databasePath = configuration.GetConnectionString("DatabasePath");
         if (databasePath == null)
         {
-            databasePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,
+            databasePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,"Resources",
                                         "IPManager.db");
         }
         DatabasePath = $"Data Source={databasePath};Version=3;Compress=True;";
@@ -31,6 +35,8 @@ public class Database
     {
         DatabasePath = $"Data Source={databasePath};Version=3;Compress=True;";
     }
+
+    #endregion
 
     #region Private methods
 
@@ -66,10 +72,10 @@ public class Database
     #region Public methods
 
     #region Create querries
-    public void CreateNewIPSettings(string Name, string Prefix)
+    public void CreateNewIPSettings(IPv4Database ipv4settings)
     {
-        string Querry = $"INSERT INTO Project (Name, Prefix)" +
-                        $"VALUES('{Name}','{Prefix}')";
+        string Querry = $"INSERT INTO IPList (Description, IP, SubnetMask, DefaultGateway)" +
+                        $"VALUES('{ipv4settings.Description}','{ipv4settings.IP}','{ipv4settings.SubnetMask}','{ipv4settings.DefaultGateway}')";
 
         WriteQuery(Querry);
     }
@@ -77,13 +83,14 @@ public class Database
     #endregion
 
     #region Get querries
-    public int GetIPList(string Name)
+    public List<IPv4Database> GetAllIPs()
     {
+        List<IPv4Database> IPList = new();
         using (SQLiteConnection Db = new SQLiteConnection(DatabasePath))
         {
             Db.Open();
 
-            string Querry = $"SELECT ID FROM Project WHERE Name = '{Name}'";
+            string Querry = $"SELECT * FROM IPList";
 
             using (SQLiteCommand cmd = new SQLiteCommand(Querry, Db))
             {
@@ -93,15 +100,19 @@ public class Database
                     {
                         if (dataReader.GetInt32(0) != 0)
                         {
-                            return dataReader.GetInt32(0);
+                            IPv4Database ipv4 = new(dataReader.GetString(1),
+                                                    dataReader.GetString(2),
+                                                    dataReader.GetString(3),
+                                                    dataReader.GetString(4));
+                            ipv4.ID = dataReader.GetInt32(0);
+
+                            IPList.Add(ipv4);
                         }
                     }
-                    //TODO create exception
-                    return -1;
                 }
             }
         }
-
+        return IPList;
     }
 
     #endregion
@@ -132,7 +143,7 @@ public class Database
 
         WriteQuery(Querry);
     }
-  
+
     #endregion
 
     #region settings

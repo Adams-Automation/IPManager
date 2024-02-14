@@ -42,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DatabaseLibrary\DatabaseLibrary.csproj" />
     <ProjectReference Include="..\NetworkInterfaceLibrary\NetworkInterfaceLibrary.csproj" />
   </ItemGroup>
 

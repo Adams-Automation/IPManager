@@ -75,6 +75,7 @@ public class NetworkHelper
         Process p = new Process();
         ProcessStartInfo psi = new ProcessStartInfo("netsh", $"interface ip set address {Name} static {IP} {SubnetMask} {DefaultGateway} 1");
         psi.UseShellExecute = true;
+        psi.WindowStyle = ProcessWindowStyle.Hidden;
         p.StartInfo = psi;
         psi.Verb = "runas";
         p.Start();
@@ -85,6 +86,7 @@ public class NetworkHelper
         Process p = new Process();
         ProcessStartInfo psi = new ProcessStartInfo("netsh", $"interface ip set address {Name} dhcp");
         psi.UseShellExecute = true;
+        psi.WindowStyle = ProcessWindowStyle.Hidden;
         p.StartInfo = psi;
         psi.Verb = "runas";
         p.Start();

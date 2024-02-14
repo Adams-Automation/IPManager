@@ -1,4 +1,5 @@
-﻿using IPManagerUI.Properties;
+﻿using DatabaseLibrary;
+using IPManagerUI.Properties;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,7 @@ namespace IPManagerUI
                         services.Configure<AppSettingsSection>(configuration);
 
                         //Add dependencies
+                        services.AddSingleton<IDatabase, Database>();
 
                         //Add resources from WPF
                         services.AddSingleton<MainWindow>();
@@ -88,6 +90,7 @@ namespace IPManagerUI
         private void CheckUserSettings()
         {
             SetBaseTheme();
+            //SetDatabasePath();
         }
 
         private void SetBaseTheme()
@@ -108,5 +111,13 @@ namespace IPManagerUI
             //Change the app's current theme
             paletteHelper.SetTheme(theme);
         }
+
+        //private void SetDatabasePath(IDatabase database)
+        //{
+        //    if (UserSettings.Default.DatabaseLocation != UserSettings.Default.DefaultDatabaseLocation)
+        //    {
+        //        database.SetDatabaseFilePath(UserSettings.Default.DatabaseLocation);
+        //    }
+        //}
     }
 }

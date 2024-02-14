@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NetworkInterfaceLibrary\NetworkInterfaceLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Resources\IPManager.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

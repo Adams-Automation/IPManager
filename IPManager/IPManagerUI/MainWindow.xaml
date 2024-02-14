@@ -13,7 +13,8 @@
         FontFamily="{materialDesign:MaterialDesignFont}"
         
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="800" 
+        DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -92,27 +93,33 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="1">
-            <ListView x:Name="IPAddressesListView">
+                    Grid.Row="1"
+                    Margin="10">
+            <ListView x:Name="IPAddressesListView"
+                      ItemsSource="{Binding IPList}"
+                      SelectedItem="{Binding SelectedIP}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Description" Width="Auto" DisplayMemberBinding="{Binding Tag}"/>
-                        <GridViewColumn Header="IP" Width="Auto" DisplayMemberBinding="{Binding Location}"/>
-                        <GridViewColumn Header="Subnetmask" Width="Auto" DisplayMemberBinding="{Binding Location}"/>
-                        <GridViewColumn Header="Default gateway" Width="Auto" DisplayMemberBinding="{Binding Location}"/>
+                        <GridViewColumn Header="Description" Width="Auto" DisplayMemberBinding="{Binding Description}"/>
+                        <GridViewColumn Header="IP" Width="Auto" DisplayMemberBinding="{Binding IP}"/>
+                        <GridViewColumn Header="Subnetmask" Width="Auto" DisplayMemberBinding="{Binding SubnetMask}"/>
+                        <GridViewColumn Header="Default gateway" Width="Auto" DisplayMemberBinding="{Binding DefaultGateway}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
             <StackPanel Orientation="Vertical">
                 <Button x:Name="AddNewIPButton"
                         Content="Add"
-                        Margin="10"/>
+                        Margin="10"
+                        Click="AddNewIPButton_Click"/>
                 <Button x:Name="EditIPButton"
                         Content="Edit"
-                        Margin="10"/>
+                        Margin="10"
+                        Click="EditIPButton_Click"/>
                 <Button x:Name="DeleteIPButton"
                         Content="Delete"
-                        Margin="10"/>
+                        Margin="10"
+                        Click="DeleteIPButton_Click"/>
             </StackPanel>
         </StackPanel>
         
