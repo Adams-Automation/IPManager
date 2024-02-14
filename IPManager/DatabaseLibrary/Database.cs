@@ -4,6 +4,8 @@ using Microsoft.Extensions.Logging;
 using System.Reflection;
 using NetworkInterfaceLibrary.Models;
 using DatabaseLibrary.Models;
+using System.CodeDom;
+using System;
 
 namespace DatabaseLibrary;
 
@@ -20,7 +22,7 @@ public class Database : IDatabase
         string? databasePath = configuration.GetConnectionString("DatabasePath");
         if (databasePath == null)
         {
-            databasePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,"Resources",
+            databasePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "Resources",
                                         "IPManager.db");
         }
         DatabasePath = $"Data Source={databasePath};Version=3;Compress=True;";
@@ -38,15 +40,15 @@ public class Database : IDatabase
 
     #endregion
 
+    #region Events
+    public event EventHandler IPListChanged;
+    #endregion
+
     #region Private methods
 
     private void WriteQuery(string querry)
     {
-        if (Logger != null)
-        {
-            Logger.LogInformation($"Database: {DatabasePath}" +
-            $"Writing querry: {querry}");
-        }
+        Logger?.LogInformation($"Database: {DatabasePath} Writing querry: {querry}");
         try
         {
             using (SQLiteConnection Db = new SQLiteConnection(DatabasePath))
@@ -62,7 +64,7 @@ public class Database : IDatabase
         }
         catch (Exception ex)
         {
-            if (Logger != null) { Logger.LogError(ex, $"Trying to write querry: {querry}"); }
+            Logger?.LogError(ex, $"Trying to write querry: {querry}");
             throw;
         }
     }
@@ -78,6 +80,9 @@ public class Database : IDatabase
                         $"VALUES('{ipv4settings.Description}','{ipv4settings.IP}','{ipv4settings.SubnetMask}','{ipv4settings.DefaultGateway}')";
 
         WriteQuery(Querry);
+
+        //Trigger event so UI knows to reload list
+        IPListChanged?.Invoke(this, EventArgs.Empty);
     }
 
     #endregion
@@ -119,29 +124,33 @@ public class Database : IDatabase
 
     #region Delete querries
 
-    public void DeleteIPSettings(int? referenceID)
+    public void DeleteIPSettings(IPv4Database IPv4Database)
     {
-        if (referenceID == null)
-        {
-            return;
-        }
-
-        string Querry = $"DELETE FROM ReferenceTags \n" +
-                        $"WHERE ID={referenceID}";
+        string Querry = $"DELETE FROM IPList \n" +
+                        $"WHERE ID={IPv4Database.ID}";
 
         WriteQuery(Querry);
+
+        //Trigger event so UI knows to reload list
+        IPListChanged?.Invoke(this, EventArgs.Empty);
     }
 
     #endregion
 
     #region Update querries
 
-    public void UpdateIPSettings(string reference)
+    public void UpdateIPSettings(IPv4Database IPv4Database)
     {
-        string Querry = $"UPDATE ReferenceTags SET Tag = '{reference}', Location = '{reference}' \n" +
-                        $"WHERE ID = '{reference}'";
+        string Querry = $"UPDATE IPList SET Description = '{IPv4Database.Description}', " +
+                        $"IP = '{IPv4Database.IP}', " +
+                        $"SubnetMask = '{IPv4Database.SubnetMask}', " +
+                        $"DefaultGateway = '{IPv4Database.DefaultGateway}' \n" +
+                        $"WHERE ID = '{IPv4Database.ID}'";
 
         WriteQuery(Querry);
+
+        //Trigger event so UI knows to reload list
+        IPListChanged?.Invoke(this, EventArgs.Empty);
     }
 
     #endregion

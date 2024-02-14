@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IPManagerUI"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="600" Width="800" 
+        DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}"
+        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
-        FontFamily="{materialDesign:MaterialDesignFont}"
-        
-        WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="600" Width="800" 
-        DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
+        FontFamily="{materialDesign:MaterialDesignFont}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>

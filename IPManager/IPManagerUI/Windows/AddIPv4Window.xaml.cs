@@ -1,27 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
-namespace IPManagerUI.Windows
+using DatabaseLibrary;
+using DatabaseLibrary.Models;
+
+namespace IPManagerUI.Windows;
+
+/// <summary>
+/// Interaction logic for AddIPv4Window.xaml
+/// </summary>
+public partial class AddIPv4Window : Window
 {
-    /// <summary>
-    /// Interaction logic for AddIPv4Window.xaml
-    /// </summary>
-    public partial class AddIPv4Window : Window
+    public IPv4Database IPv4Database { get; set; } = new(string.Empty, string.Empty);
+    public IDatabase Database { get; }
+
+    public AddIPv4Window(IDatabase database)
     {
-        public AddIPv4Window()
+        InitializeComponent();
+        Database = database;
+    }
+
+    public void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
+
+    public void CreateButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            InitializeComponent();
+            if (IPv4Database.Description != string.Empty && IPv4Database.IP != string.Empty)
+            {
+                Database.CreateNewIPSettings(IPv4Database);
+            }
+            else
+            {
+                MessageBox.Show("Please fill in the required data.", "Error");
+            }
+
+            this.Close();
+        } 
+        catch(Exception ex)
+        {
+            MessageBox.Show($"{ex.Message}", "Error");
         }
     }
 }

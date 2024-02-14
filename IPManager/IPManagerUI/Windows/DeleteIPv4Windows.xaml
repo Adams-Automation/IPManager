@@ -5,8 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IPManagerUI.Windows"
         mc:Ignorable="d"
-        Title="DeleteIPv4Windows" Height="450" Width="800">
-    <Grid>
+        Title="AddIPv4Window" Height="200" Width="300"        
+        DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}"
         
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+    <Grid>
+        <StackPanel Orientation="Horizontal"
+                    Margin="10">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Description :"
+                       HorizontalAlignment="Right"/>
+                <Label Content="IP address :"
+                       HorizontalAlignment="Right"/>
+                <Label Content="Subnet mask :"
+                       HorizontalAlignment="Right"/>
+                <Label Content="Default gateway :"
+                       HorizontalAlignment="Right"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock x:Name="DescriptionTextBox"
+                           Width="150"
+                           Padding="4"
+                           Text="{Binding IPv4Database.Description}"/>
+                <TextBlock x:Name="IPTextBox"
+                           Width="150"
+                           Padding="4"
+                           Text="{Binding IPv4Database.IP}"/>
+                <TextBlock x:Name="SubnetMaskTextBox"
+                           Width="150"
+                           Padding="4"
+                           Text="{Binding IPv4Database.SubnetMask}"/>
+                <TextBlock x:Name="DefaultGatewayTextBox"
+                           Width="150"
+                           Padding="4"
+                           Text="{Binding IPv4Database.DefaultGateway}"/>
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+            <Button x:Name="DeleteButton"
+                    Content="Delete"
+                    Width="100"
+                    Click="DeleteButton_Click"/>
+            <Button x:Name="CancelButton"
+                    Content="Cancel"
+                    Width="100"
+                    Margin="10 0 0 0"
+                    Click="CancelButton_Click"/>
+        </StackPanel>
+
     </Grid>
 </Window>

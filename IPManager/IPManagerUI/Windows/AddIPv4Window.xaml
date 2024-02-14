@@ -5,8 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IPManagerUI.Windows"
         mc:Ignorable="d"
-        Title="AddIPv4Window" Height="450" Width="800">
+        Title="AddIPv4Window" Height="200" Width="300"
+        DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}">
     <Grid>
+        <StackPanel Orientation="Horizontal"
+                    Margin="10">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Description :"
+                       HorizontalAlignment="Right"/>
+                <Label Content="IP address :"
+                       HorizontalAlignment="Right"/>
+                <Label Content="Subnet mask :"
+                       HorizontalAlignment="Right"/>
+                <Label Content="Default gateway :"
+                       HorizontalAlignment="Right"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBox x:Name="DescriptionTextBox"
+                         Width="150"
+                         Text="{Binding IPv4Database.Description}"/>
+                <TextBox x:Name="IPTextBox"
+                         Width="150"
+                         Text="{Binding IPv4Database.IP}"/>
+                <TextBox x:Name="SubnetMaskTextBox"
+                         Width="150"
+                         Text="{Binding IPv4Database.SubnetMask}"/>
+                <TextBox x:Name="DefaultGatewayTextBox"
+                         Width="150"
+                         Text="{Binding IPv4Database.DefaultGateway}"/>
+            </StackPanel>
+            
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+            <Button x:Name="CreateButton"
+                    Content="Create"
+                    Width="100"
+                    Click="CreateButton_Click"/>
+            <Button x:Name="CancelButton"
+                    Content="Cancel"
+                    Width="100"
+                    Margin="10 0 0 0"
+                    Click="CancelButton_Click"/>
+        </StackPanel>
         
     </Grid>
 </Window>

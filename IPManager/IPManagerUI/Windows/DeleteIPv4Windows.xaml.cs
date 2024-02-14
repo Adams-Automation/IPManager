@@ -1,27 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace IPManagerUI.Windows
+using DatabaseLibrary;
+using DatabaseLibrary.Models;
+
+namespace IPManagerUI.Windows;
+
+/// <summary>
+/// Interaction logic for DeleteIPv4Windows.xaml
+/// </summary>
+public partial class DeleteIPv4Windows : Window, INotifyPropertyChanged
 {
-    /// <summary>
-    /// Interaction logic for DeleteIPv4Windows.xaml
-    /// </summary>
-    public partial class DeleteIPv4Windows : Window
+    public IDatabase Database { get; }
+
+    private IPv4Database _IPv4Database;
+
+    public IPv4Database IPv4Database
     {
-        public DeleteIPv4Windows()
+        get { return _IPv4Database; }
+        set
         {
-            InitializeComponent();
+            _IPv4Database = value;
+            OnPropertyChanged(nameof(IPv4Database));
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    private void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public DeleteIPv4Windows(IDatabase database, IPv4Database ipv4Database)
+    {
+        InitializeComponent();
+        Database = database;
+        IPv4Database = ipv4Database;
+    }
+
+    public void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
+
+    public void DeleteButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            if (IPv4Database.Description != string.Empty && IPv4Database.IP != string.Empty)
+            {
+                Database.DeleteIPSettings(IPv4Database);
+            }
+            else
+            {
+                MessageBox.Show("Please fill in the required data.", "Error");
+            }
+
+            this.Close();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"{ex.Message}", "Error");
         }
     }
 }

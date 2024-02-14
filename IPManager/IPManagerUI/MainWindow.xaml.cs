@@ -7,6 +7,7 @@ using NetworkInterfaceLibrary;
 using NetworkInterfaceLibrary.Models;
 using DatabaseLibrary.Models;
 using DatabaseLibrary;
+using IPManagerUI.Windows;
 
 namespace IPManagerUI;
 
@@ -123,6 +124,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         //Connect event
         NetworkChange.NetworkAddressChanged += new
         NetworkAddressChangedEventHandler(AddressChangedCallback);
+
+        _Database.IPListChanged += RepopulateIPList;
     }
 
     #region Private methods
@@ -167,6 +170,11 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         }
 
         ProcessInfo = "Done.";
+    }
+
+    private void RepopulateIPList(object? sender, EventArgs e)
+    {
+        IPList = _Database.GetAllIPs();
     }
 
     #endregion
@@ -220,17 +228,34 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     private void AddNewIPButton_Click(object sender, RoutedEventArgs e)
     {
-
+        AddIPv4Window addIPv4Window = new(_Database);
+        addIPv4Window.Show();
     }
 
     private void EditIPButton_Click(object sender, RoutedEventArgs e)
     {
-
+        if (SelectedIP != null)
+        {
+            EditIPv4Window editIPv4Window = new(_Database, SelectedIP);
+            editIPv4Window.Show();
+        }
+        else
+        {
+            MessageBox.Show("Please select an IP from the list.");
+        }
     }
 
     private void DeleteIPButton_Click(object sender, RoutedEventArgs e)
     {
-
+        if(SelectedIP != null)
+        {
+            DeleteIPv4Windows deleteIPv4Window = new(_Database, SelectedIP);
+            deleteIPv4Window.Show();
+        }
+        else
+        {
+            MessageBox.Show("Please select an IP from the list.");
+        }
     }
 
     #endregion
