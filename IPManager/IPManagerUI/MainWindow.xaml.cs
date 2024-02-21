@@ -259,4 +259,21 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     }
 
     #endregion
+
+    #region Info Commands
+
+    private void AboutButton_Click(object sender, RoutedEventArgs e)
+    {
+        AboutWindow aboutWindow = new AboutWindow();
+        aboutWindow.Show();
+    }
+
+    private void HelpButton_Click(object sender, RoutedEventArgs e)
+    {
+        HelpWindow helpWindow = new HelpWindow();
+        helpWindow.Show();
+    }
+
+    #endregion
+
 }

@@ -33,7 +33,9 @@
                          Text="{Binding IPv4Database.Description}"/>
                 <TextBox x:Name="IPTextBox"
                          Width="150"
-                         Text="{Binding IPv4Database.IP}"/>
+                         Text="{Binding IPv4Database.IP}"
+                         LostFocus="IPTextBox_LostFocus"
+                         LostKeyboardFocus="IPTextBox_LostFocus"/>
                 <TextBox x:Name="SubnetMaskTextBox"
                          Width="150"
                          Text="{Binding IPv4Database.SubnetMask}"/>
