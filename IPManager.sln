@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPManagerUI", "IPManagerUI\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkInterfaceLibrary", "NetworkInterfaceLibrary\NetworkInterfaceLibrary.csproj", "{C1B664EB-13BD-4BF1-8943-D3283BF2ECC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseLibrary", "DatabaseLibrary\DatabaseLibrary.csproj", "{3DBC2965-41CF-4685-8AB2-DE068AD2B050}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseLibrary", "DatabaseLibrary\DatabaseLibrary.csproj", "{3DBC2965-41CF-4685-8AB2-DE068AD2B050}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
