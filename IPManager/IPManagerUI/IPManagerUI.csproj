@@ -7,7 +7,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Resources\Logo 32x32.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\SplashPage.png" />
+    <None Remove="Windows\Email Footer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Logo 32x32.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci484" />
@@ -44,6 +54,14 @@
   <ItemGroup>
     <ProjectReference Include="..\DatabaseLibrary\DatabaseLibrary.csproj" />
     <ProjectReference Include="..\NetworkInterfaceLibrary\NetworkInterfaceLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Windows\Email Footer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Resources\SplashPage.png" />
   </ItemGroup>
 
 </Project>

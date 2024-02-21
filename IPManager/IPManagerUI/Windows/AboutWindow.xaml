@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IPManagerUI.Windows"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="About" Height="200" Width="300"
+        Title="About" Height="250" Width="300"
         DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}"
 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -16,48 +16,56 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <Label Content="Build by :"
-                       HorizontalAlignment="Right"/>
-                <Label Content="Country :"
-                       HorizontalAlignment="Right"/>
-                <Label Content="Web page :"
-                       HorizontalAlignment="Right"/>
-                <Label Content="Github repo :"
-                       HorizontalAlignment="Right"/>
-                <Label Content="Version :"
-                       HorizontalAlignment="Right"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
-                <Label Content="Adams Automation BV"/>
-                <Label Content="Belgium"/>
-                <TextBlock x:Name="WebPageTextBlock"
-                           Padding="2">
-                    <Hyperlink Click="WebPageTextBlock_Click" 
-                               Style="{StaticResource MaterialDesignBody2Hyperlink }"
-                               ToolTip="{Binding WebPage}">
-                        <TextBlock>                            
-                            <materialDesign:PackIcon Kind="Web"/>
-                            Adams automation
-                        </TextBlock>
-                    </Hyperlink>
-                </TextBlock>
-                <TextBlock x:Name="GithubTextBlock"
-                           Padding="2">
-                    <Hyperlink Click="GithubTextBlock_Click" 
-                               Style="{StaticResource MaterialDesignBody2Hyperlink }"
-                               ToolTip="{Binding GitHubPage}">
-                        <TextBlock>                            
-                            <materialDesign:PackIcon Kind="Github"/>
-                            Github
-                        </TextBlock>
-                    </Hyperlink>
-                </TextBlock>
-                <Label x:Name="VersionLabel"
-                       Content="{Binding Version}"/>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Build by :"
+                           HorizontalAlignment="Right"/>
+                    <Label Content="Country :"
+                           HorizontalAlignment="Right"/>
+                    <Label Content="Web page :"
+                           HorizontalAlignment="Right"/>
+                    <Label Content="Github repo :"
+                           HorizontalAlignment="Right"/>
+                    <Label Content="Project :"
+                            HorizontalAlignment="Right"/>
+                    <Label Content="Version :"
+                        HorizontalAlignment="Right"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Adams Automation BV"/>
+                    <Label Content="Belgium"/>
+                    <TextBlock x:Name="WebPageTextBlock"
+                               Padding="2">
+                        <Hyperlink Click="WebPageTextBlock_Click" 
+                                   Style="{StaticResource MaterialDesignBody2Hyperlink }"
+                                   ToolTip="{Binding WebPage}">
+                            <TextBlock>                            
+                                <materialDesign:PackIcon Kind="Web"/>
+                                Adams automation
+                            </TextBlock>
+                        </Hyperlink>
+                    </TextBlock>
+                    <TextBlock x:Name="GithubTextBlock"
+                               Padding="2">
+                        <Hyperlink Click="GithubTextBlock_Click" 
+                                   Style="{StaticResource MaterialDesignBody2Hyperlink }"
+                                   ToolTip="{Binding GitHubPage}">
+                            <TextBlock>                            
+                                <materialDesign:PackIcon Kind="Github"/>
+                                Github
+                            </TextBlock>
+                        </Hyperlink>
+                    </TextBlock>
+                    <Label Content="IP Manager"/>
+                    <Label x:Name="VersionLabel"
+                           Content="{Binding Version}"/>
+
+                </StackPanel>
 
             </StackPanel>
+            <Image Source="/Windows/Email Footer.png"
+                   Margin="10"/>
         </StackPanel>
     </Grid>
 </Window>
