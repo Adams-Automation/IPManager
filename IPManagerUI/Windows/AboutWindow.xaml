@@ -64,7 +64,7 @@
                 </StackPanel>
 
             </StackPanel>
-            <Image Source="/Windows/Email Footer.png"
+            <Image Source="/Resources/Email Footer.png"
                    Margin="10"/>
         </StackPanel>
     </Grid>

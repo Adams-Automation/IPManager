@@ -8,10 +8,12 @@
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\Logo 32x32.ico</ApplicationIcon>
+    <UseWindowsForms>True</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\SplashPage.png" />
+    <None Remove="Windows\Email Footer.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,9 +46,15 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Help\PowerCollections.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\UserSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>UserSettings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
@@ -56,7 +64,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Windows\Email Footer.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <SplashScreen Include="Resources\SplashPage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Help\" />
   </ItemGroup>
 
 </Project>

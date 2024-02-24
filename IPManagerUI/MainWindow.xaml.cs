@@ -9,6 +9,9 @@ using DatabaseLibrary.Models;
 using DatabaseLibrary;
 using IPManagerUI.Windows;
 
+using MessageBox = System.Windows.MessageBox;
+using System.Reflection;
+
 namespace IPManagerUI;
 
 /// <summary>
@@ -270,8 +273,10 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     private void HelpButton_Click(object sender, RoutedEventArgs e)
     {
-        HelpWindow helpWindow = new HelpWindow();
-        helpWindow.Show();
+        try
+        {
+            System.Windows.Forms.Help.ShowHelp(null, "Help/PowerCollections.chm");
+        } catch(Exception ex) { MessageBox.Show(ex.Message); }
     }
 
     #endregion

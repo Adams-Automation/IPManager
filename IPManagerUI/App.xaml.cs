@@ -16,7 +16,7 @@ namespace IPManagerUI
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
         public static IHost? AppHost { get; private set; }
 
