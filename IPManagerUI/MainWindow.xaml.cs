@@ -275,6 +275,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         try
         {
+            //See example https://stackoverflow.com/questions/5116465/integrating-help-in-a-wpf-application
             System.Windows.Forms.Help.ShowHelp(null, "Help/PowerCollections.chm");
         } catch(Exception ex) { MessageBox.Show(ex.Message); }
     }
