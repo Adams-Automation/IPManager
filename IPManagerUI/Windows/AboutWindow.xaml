@@ -25,6 +25,8 @@
                            HorizontalAlignment="Right"/>
                     <Label x:Name="DescWebPageLabel" Content="Web page :"
                            HorizontalAlignment="Right"/>
+                    <Label x:Name="DescLinkedInLabel" Content="Linked In :"
+                           HorizontalAlignment="Right"/>
                     <Label x:Name="DescGithubLabel" Content="Github repo :"
                            HorizontalAlignment="Right"/>
                     <Label x:Name="DescProjectLabel" Content="Project :"
@@ -35,28 +37,86 @@
                 <StackPanel x:Name="DataStackPanel" Orientation="Vertical">
                     <Label x:Name="CompanyLabel" Content="Adams Automation BV"/>
                     <Label x:Name="CountryLabel" Content="Belgium"/>
-                    <TextBlock x:Name="WebPageTextBlock"
-                               Padding="2">
-                        <Hyperlink Click="WebPageTextBlock_Click" 
-                                   Style="{StaticResource MaterialDesignBody2Hyperlink }"
-                                   ToolTip="{Binding WebPage}">
-                            <TextBlock>                            
-                                <materialDesign:PackIcon Kind="Web"/>
-                                Adams automation
-                            </TextBlock>
-                        </Hyperlink>
-                    </TextBlock>
-                    <TextBlock x:Name="GithubTextBlock"
-                               Padding="2">
-                        <Hyperlink Click="GithubTextBlock_Click" 
-                                   Style="{StaticResource MaterialDesignBody2Hyperlink }"
-                                   ToolTip="{Binding GitHubPage}">
-                            <TextBlock>                            
-                                <materialDesign:PackIcon Kind="Github"/>
-                                Github
-                            </TextBlock>
-                        </Hyperlink>
-                    </TextBlock>
+                    <StackPanel x:Name="WebsiteStackPanel" 
+                                Orientation="Horizontal">
+                        <TextBlock x:Name="WebPageTextBlock"
+                                   Padding="2">
+                            <Hyperlink Click="WebPageTextBlock_Click" 
+                                        Style="{StaticResource MaterialDesignBody2Hyperlink }"
+                                        ToolTip="{Binding WebPage}">
+                                <TextBlock>                            
+                                    <materialDesign:PackIcon Kind="Web"/>
+                                    Adams automation
+                                </TextBlock>
+                            </Hyperlink>
+                        </TextBlock>
+                        <Button x:Name="CopyWebsiteButton"
+                                Margin="10 0 0 0"
+                                Width="20"
+                                Height="20"
+                                Padding="0"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Click="CopyWebsiteButton_Click">
+                            <ContentControl>
+                                <materialDesign:PackIcon Kind="ContentCopy"/>
+                            </ContentControl>
+                        </Button>
+
+                    </StackPanel>
+                    <StackPanel x:Name="LinkedInStackPanel" 
+                                Orientation="Horizontal">
+                        <TextBlock x:Name="LinkedInTextBlock"
+                                   Padding="2">
+                            <Hyperlink Click="WebPageTextBlock_Click" 
+                                        Style="{StaticResource MaterialDesignBody2Hyperlink }"
+                                        ToolTip="{Binding WebPage}">
+                                <TextBlock>                            
+                                    <materialDesign:PackIcon Kind="Linkedin"/>
+                                    Linked In
+                                </TextBlock>
+                            </Hyperlink>
+                        </TextBlock>    
+                        <Button x:Name="CopyLinkedInButton"
+                                Margin="10 0 0 0"
+                                Width="20"
+                                Height="20"
+                                Padding="0"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Click="CopyLinkedInButton_Click">
+                            <ContentControl>
+                                <materialDesign:PackIcon Kind="ContentCopy"/>
+                            </ContentControl>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel x:Name="GithubDataStackPanel" 
+                                Orientation="Horizontal">
+                        <TextBlock x:Name="GithubTextBlock"
+                                   Padding="2">
+                            <Hyperlink Click="GithubTextBlock_Click" 
+                                       Style="{StaticResource MaterialDesignBody2Hyperlink }"
+                                       ToolTip="{Binding GitHubPage}">
+                                <TextBlock>                            
+                                    <materialDesign:PackIcon Kind="Github"/>
+                                    Github
+                                </TextBlock>
+                            </Hyperlink>
+                        </TextBlock>
+                        <Button x:Name="CopyGithubButton"
+                                Margin="10 0 0 0"
+                                Width="20"
+                                Height="20"
+                                Padding="0"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Click="CopyGithubButton_Click"  >
+                            <ContentControl>
+                                <materialDesign:PackIcon Kind="ContentCopy"/>
+                            </ContentControl>
+                        </Button>
+                    </StackPanel>
+                    
                     <Label x:Name="ProjectLabel" Content="IP Manager"/>
                     <Label x:Name="VersionLabel"
                            Content="{Binding Version}"/>

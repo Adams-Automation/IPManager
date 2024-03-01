@@ -16,6 +16,13 @@ namespace IPManagerUI.Windows
             get { return _WebPage; }
         }
 
+        private string _LinkedInPage = "https://www.linkedin.com/company/adamsautomation/";
+
+        public string LinkedInPage
+        {
+            get { return _LinkedInPage; }
+        }
+
         public string Version { get; } = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         private string _GitHubPage = "https://github.com/Adams-Automation/IPManager";
@@ -54,6 +61,21 @@ namespace IPManagerUI.Windows
             {
                 MessageBox.Show(other.Message);
             }
+        }
+
+        private void CopyWebsiteButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Clipboard.SetText(WebPage);
+        }
+
+        private void CopyGithubButton_Click(object sender, RoutedEventArgs e)
+        {            
+            System.Windows.Clipboard.SetText(GitHubPage);
+        }
+
+        private void CopyLinkedInButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Clipboard.SetText(LinkedInPage);
         }
     }
 }
