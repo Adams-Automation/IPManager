@@ -1,4 +1,4 @@
-﻿<Window x:Class="IPManagerUI.Windows.AddIPv4Window"
+﻿<Window x:Name="AddIPWindow" x:Class="IPManagerUI.Windows.AddIPv4Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -15,19 +15,23 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}">
     <Grid>
-        <StackPanel Orientation="Horizontal"
+        <StackPanel x:Name="AddIPStackPanel" Orientation="Horizontal"
                     Margin="10">
-            <StackPanel Orientation="Vertical">
-                <Label Content="Description :"
+            <StackPanel x:Name="DescriptionStackPanel" Orientation="Vertical">
+                <Label x:Name="DescDescriptionLabel" 
+                       Content="Description :"
                        HorizontalAlignment="Right"/>
-                <Label Content="IP address :"
+                <Label x:Name="DescIPAddressLabel" 
+                       Content="IP address :"
                        HorizontalAlignment="Right"/>
-                <Label Content="Subnet mask :"
+                <Label x:Name="DescSubnetMaskLabel" 
+                       Content="Subnet mask :"
                        HorizontalAlignment="Right"/>
-                <Label Content="Default gateway :"
+                <Label x:Name="DescDefaultGatewayLabel" 
+                       Content="Default gateway :"
                        HorizontalAlignment="Right"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical">
+            <StackPanel x:Name="DataStackPanel" Orientation="Vertical">
                 <TextBox x:Name="DescriptionTextBox"
                          Width="150"
                          Text="{Binding IPv4Database.Description}"/>
@@ -46,7 +50,7 @@
             
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal"
+        <StackPanel x:Name="ButtonStackPanel" Orientation="Horizontal"
                     Margin="10"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom">

@@ -1,4 +1,4 @@
-﻿<Window x:Class="IPManagerUI.Windows.AboutWindow"
+﻿<Window x:Name="AboutWindow1" x:Class="IPManagerUI.Windows.AboutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,24 +17,24 @@
         FontFamily="{materialDesign:MaterialDesignFont}">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Build by :"
+            <StackPanel x:Name="AboutDataStackPanel" Orientation="Horizontal">
+                <StackPanel x:Name="DescriptionStackPanel" Orientation="Vertical">
+                    <Label x:Name="DescBuildByLabel" Content="Build by :"
                            HorizontalAlignment="Right"/>
-                    <Label Content="Country :"
+                    <Label x:Name="DescCountryLabel" Content="Country :"
                            HorizontalAlignment="Right"/>
-                    <Label Content="Web page :"
+                    <Label x:Name="DescWebPageLabel" Content="Web page :"
                            HorizontalAlignment="Right"/>
-                    <Label Content="Github repo :"
+                    <Label x:Name="DescGithubLabel" Content="Github repo :"
                            HorizontalAlignment="Right"/>
-                    <Label Content="Project :"
+                    <Label x:Name="DescProjectLabel" Content="Project :"
                             HorizontalAlignment="Right"/>
-                    <Label Content="Version :"
+                    <Label x:Name="DescVersionLabel" Content="Version :"
                         HorizontalAlignment="Right"/>
                 </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Adams Automation BV"/>
-                    <Label Content="Belgium"/>
+                <StackPanel x:Name="DataStackPanel" Orientation="Vertical">
+                    <Label x:Name="CompanyLabel" Content="Adams Automation BV"/>
+                    <Label x:Name="CountryLabel" Content="Belgium"/>
                     <TextBlock x:Name="WebPageTextBlock"
                                Padding="2">
                         <Hyperlink Click="WebPageTextBlock_Click" 
@@ -57,14 +57,14 @@
                             </TextBlock>
                         </Hyperlink>
                     </TextBlock>
-                    <Label Content="IP Manager"/>
+                    <Label x:Name="ProjectLabel" Content="IP Manager"/>
                     <Label x:Name="VersionLabel"
                            Content="{Binding Version}"/>
 
                 </StackPanel>
 
             </StackPanel>
-            <Image Source="/Resources/Email Footer.png"
+            <Image x:Name="CompanyInformationImage" Source="/Resources/Email Footer.png"
                    Margin="10"/>
         </StackPanel>
     </Grid>

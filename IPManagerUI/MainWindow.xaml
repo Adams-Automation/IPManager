@@ -29,9 +29,9 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical"
+        <StackPanel x:Name="InformationStackPanel" Orientation="Vertical"
                     Margin="10">
-            <StackPanel Orientation="Horizontal"
+            <StackPanel x:Name="HelpTopicsStackPanel" Orientation="Horizontal"
                         HorizontalAlignment="Right">
                 <Button x:Name="AboutButton" 
                         Style="{DynamicResource InfoButtons}"
@@ -53,24 +53,24 @@
                     </ContentControl>
                 </Button>
             </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical"
+        <StackPanel x:Name="NetworkInfoStackPanel" Orientation="Horizontal">
+            <StackPanel x:Name="DescriptionStackPanel" Orientation="Vertical"
                         HorizontalAlignment="Right">
-                <Label Content="Network adaptor :"
+                <Label x:Name="DescNetworkAdaptorLabel" Content="Network adaptor :"
                         HorizontalAlignment="Right"/>
-                <Label Content="Name :"
+                <Label x:Name="DescNameLabel" Content="Name :"
                        HorizontalAlignment="Right"/>
-                <Label Content="Mode :"
+                <Label x:Name="DescModeLabel" Content="Mode :"
                        HorizontalAlignment="Right"/>
-                <Label Content="IP V4 address :"
+                <Label x:Name="DescIPAddressLabel" Content="IP V4 address :"
                         HorizontalAlignment="Right"/>
-                <Label Content="Subnetmask :"
+                <Label x:Name="DescSubnetMaskLabel" Content="Subnetmask :"
                         HorizontalAlignment="Right"/>
-                <Label Content="Default gateway :"
+                <Label x:Name="DescDefaultGatewayLabel" Content="Default gateway :"
                         HorizontalAlignment="Right"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical"
+            <StackPanel x:Name="NetworkStatsStackPanel" Orientation="Vertical"
                         HorizontalAlignment="Left">
                 <ComboBox x:Name="NetworkAdaptorComboBox"
                           Width="400" 
@@ -125,7 +125,7 @@
         </StackPanel>
 
         </StackPanel>
-        <StackPanel Orientation="Horizontal"
+        <StackPanel x:Name="DatabaseStackPanel" Orientation="Horizontal"
                     Grid.Row="1"
                     Margin="10">
             <ListView x:Name="IPAddressesListView"
@@ -141,7 +141,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <StackPanel Orientation="Vertical">
+            <StackPanel x:Name="ActionStackPanel" Orientation="Vertical">
                 <Button x:Name="AddNewIPButton"
                         Content="Add"
                         Margin="10"
@@ -154,8 +154,10 @@
                         Content="Delete"
                         Margin="10"
                         Click="DeleteIPButton_Click"/>
+
             </StackPanel>
         </StackPanel>
         
+
     </Grid>
 </Window>

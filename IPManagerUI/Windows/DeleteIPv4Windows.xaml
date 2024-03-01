@@ -15,19 +15,19 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}">
     <Grid>
-        <StackPanel Orientation="Horizontal"
+        <StackPanel x:Name="DeleteIPStackPanel" Orientation="Horizontal"
                     Margin="10">
-            <StackPanel Orientation="Vertical">
-                <Label Content="Description :"
+            <StackPanel x:Name="DescriptionStackPanel" Orientation="Vertical">
+                <Label x:Name="DescDescriptionLabel" Content="Description :"
                        HorizontalAlignment="Right"/>
-                <Label Content="IP address :"
+                <Label x:Name="DescIPAddressLabel" Content="IP address :"
                        HorizontalAlignment="Right"/>
-                <Label Content="Subnet mask :"
+                <Label x:Name="DescSubnetmaskLabel" Content="Subnet mask :"
                        HorizontalAlignment="Right"/>
-                <Label Content="Default gateway :"
+                <Label x:Name="DescDefaultGateway" Content="Default gateway :"
                        HorizontalAlignment="Right"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical">
+            <StackPanel x:Name="DataStackPanel" Orientation="Vertical">
                 <TextBlock x:Name="DescriptionTextBox"
                            Width="150"
                            Padding="4"
@@ -48,7 +48,7 @@
 
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal"
+        <StackPanel x:Name="ButtonStackPanel" Orientation="Horizontal"
                     Margin="10"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom">
