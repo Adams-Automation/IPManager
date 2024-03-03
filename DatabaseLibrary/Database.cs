@@ -160,7 +160,11 @@ public class Database : IDatabase
     public void SetDatabaseFilePath(string path)
     {
         DatabasePath = $"Data Source={path};Version=3;Compress=True;";
+
+        //Trigger event so UI knows to reload list
+        IPListChanged?.Invoke(this, EventArgs.Empty);
     }
+    
     #endregion
 
     #endregion
