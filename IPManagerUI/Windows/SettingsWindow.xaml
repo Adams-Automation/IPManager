@@ -20,16 +20,25 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <Label x:Name="DescDarkThemeLabel" Content="Dark theme : "
-                           VerticalAlignment="Center"/>
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"/>
                     <Label x:Name="DescDatabaseLocationLabel"
-                
-                    5
-                           StackPanel>
-      £         <StackPanel Orientation="Vertical">
+                           Content="Database location : "
+                           HorizontalAlignment="Right"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
                    <ToggleButton x:Name="DarkModeToggleButton"
                                   VerticalAlignment="Center"
                                   Click="DarkModeToggleButton_Pressed" 
                                   Height="{Binding ActualHeight, ElementName=DescDarkThemeLabel, Mode=OneWay}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="DatabaseLocationTextBlock"
+                                  Width="200"
+                                  Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"/>
+                        <Button x:Name="SearchDatabaseButton"
+                                Content="..."
+                                  Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"/>
+                    </StackPanel>
 
                 </StackPanel>
             </StackPanel>
@@ -39,17 +48,14 @@
             <ListView x:Name="IgnoreNICListView"
                       Width="680" 
                       HorizontalAlignment="Left">
-   ù8+             <ListView.V+
-                    +
-       3.ù
-                    .8+iew>
+                <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Description" Width="250" DisplayMemberBinding="{Binding Description}"/>
                         <GridViewColumn Header="IP" Width="Auto" DisplayMemberBinding="{Binding IP}"/>
                         <GridViewColumn Header="Subnetmask" Width="Auto" DisplayMemberBinding="{Binding SubnetMask}"/>
                         <GridViewColumn Header="Default gateway" Width="Auto" DisplayMemberBinding="{Binding DefaultGateway}"/>
                     </GridView>
-                </ListView.V>
+                </ListView.View>
             </ListView>
         </StackPanel>
     </Grid>
