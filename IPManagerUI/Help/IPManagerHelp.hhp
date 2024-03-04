@@ -1,3 +1,12 @@
 [OPTIONS]
+Compatibility=1.1 or later
+Compiled file=IPManagerHelp.chm
+Contents file=Table of Contents.hhc
+Default topic=Home.htm
+Display compile progress=No
+Language=0x409 Engels (Verenigde Staten)
+Title=IPManagerHelp
 
-[FILES]
+
+[INFOTYPES]
+
