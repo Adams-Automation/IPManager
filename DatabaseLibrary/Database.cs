@@ -150,7 +150,7 @@ public class Database : IDatabase
                     {
                         if (dataReader.GetInt32(0) != 0)
                         {
-                            IgnoreList.Add(dataReader.GetString(0));
+                            IgnoreList.Add(dataReader.GetString(1));
                         }
                     }
                 }
@@ -177,7 +177,7 @@ public class Database : IDatabase
     public void DeleteIgnoreListName(string name)
     {
         string Querry = $"DELETE FROM IgnoreList \n" +
-                        $"WHERE Name={name}";
+                        $"WHERE Name='{name}'";
 
         WriteQuery(Querry);
 
