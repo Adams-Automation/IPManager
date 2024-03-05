@@ -96,6 +96,18 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 
     public IPv4Database? SelectedIP { get; set; }
 
+    private List<string> _IgnoreList;
+
+    public List<string> IgnoreList
+    {
+        get { return _IgnoreList; }
+        set
+        {
+            _IgnoreList = value;
+            OnPropertyChanged(nameof(IgnoreList));
+        }
+    }
+
     #endregion
 
     #endregion
@@ -124,7 +136,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         CheckUserSettings();
 
         //Populate variables
-        NICList = NetworkHelper.GetAllNetworkInterfaces();
+        IgnoreList = _Database.GetIgnoreNames();
+        NICList = NetworkHelper.GetAllNetworkInterfaces(IgnoreList);
         SelectedNic = NICList.FirstOrDefault()!;
         IPv4Settings = NetworkHelper.GetIPv4Settings(SelectedNic);
         IPList = _Database.GetAllIPs();
@@ -134,6 +147,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         NetworkAddressChangedEventHandler(AddressChangedCallback);
 
         _Database.IPListChanged += RepopulateIPList;
+        _Database.IgnoreListChanged += RepopulateNICList;
     }
 
     #region Private methods
@@ -218,6 +232,12 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         IPList = _Database.GetAllIPs();
     }
 
+    private void RepopulateNICList(object? sender, EventArgs e)
+    {
+        IgnoreList = _Database.GetIgnoreNames();
+        NICList = NetworkHelper.GetAllNetworkInterfaces(IgnoreList);
+    }
+
     #endregion
 
     #region Network Commands
@@ -296,6 +316,14 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         else
         {
             MessageBox.Show("Please select an IP from the list.");
+        }
+    }
+
+    private void IgnoreButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (NetworkAdaptorComboBox.SelectedItem != null)
+        {
+            _Database.CreateIgnoreNetworkName(NetworkAdaptorComboBox.SelectedItem.ToString());
         }
     }
 

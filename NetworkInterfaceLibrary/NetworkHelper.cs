@@ -28,6 +28,30 @@ public class NetworkHelper
         return NICList;
     }
 
+    public static List<NetworkInterface> GetAllNetworkInterfaces(List<string> IgnoreList)
+    {
+        List<NetworkInterface> NICList = new();
+
+        foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+        {
+            if (nic.OperationalStatus == OperationalStatus.Up &&
+                (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet ||
+                nic.NetworkInterfaceType == NetworkInterfaceType.GigabitEthernet ||
+                nic.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||
+                nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet3Megabit ||
+                nic.NetworkInterfaceType == NetworkInterfaceType.FastEthernetFx ||
+                nic.NetworkInterfaceType == NetworkInterfaceType.FastEthernetT))
+            {
+                if (!IgnoreList.Contains(nic.Name))
+                {
+                    NICList.Add(nic);
+                }
+            }
+        }
+
+        return NICList;
+    }
+
     public static IPv4Settings GetIPv4Settings(NetworkInterface NIC)
     {
         IPv4Settings ipv4Setting = new();
