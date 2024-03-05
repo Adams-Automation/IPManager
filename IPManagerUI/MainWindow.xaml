@@ -33,6 +33,15 @@
                     Margin="10">
             <StackPanel x:Name="HelpTopicsStackPanel" Orientation="Horizontal"
                         HorizontalAlignment="Right">
+                <Button x:Name="SettingsButton" 
+                        Style="{DynamicResource InfoButtons}"
+                        Click="SettingsButton_Click">
+                    <ContentControl>
+                        <materialDesign:PackIcon Kind="Settings"
+                                                 Height="25"
+                                                 Width="25"/>
+                    </ContentControl>
+                </Button>
                 <Button x:Name="AboutButton" 
                         Style="{DynamicResource InfoButtons}"
                         Click="AboutButton_Click">

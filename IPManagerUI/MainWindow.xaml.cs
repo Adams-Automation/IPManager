@@ -318,6 +318,11 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         } catch(Exception ex) { MessageBox.Show(ex.Message); }
     }
 
+    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        SettingsWindow settingsWindow = new SettingsWindow(_Database);
+        settingsWindow.Show();
+    }
     #endregion
 
 }
