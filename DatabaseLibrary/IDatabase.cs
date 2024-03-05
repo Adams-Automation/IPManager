@@ -7,12 +7,20 @@ namespace DatabaseLibrary
         string DatabasePath { get; set; }
 
         void CreateNewIPSettings(IPv4Database ipv4settings);
+        void CreateIgnoreNetworkName(string name);
+
         void DeleteIPSettings(IPv4Database IPv4Database);
+        void DeleteIgnoreListName(string name);
+
         List<IPv4Database> GetAllIPs();
+        List<string> GetIgnoreNames();
+
         void SetDatabaseFilePath(string path);
+
         void UpdateIPSettings(IPv4Database IPv4Database);
 
         //Events
-        public event EventHandler IPListChanged;
+        event EventHandler IPListChanged;
+        event EventHandler IgnoreListChanged;
     }
 }

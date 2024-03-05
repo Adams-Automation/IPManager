@@ -42,6 +42,7 @@ public class Database : IDatabase
 
     #region Events
     public event EventHandler IPListChanged;
+    public event EventHandler IgnoreListChanged;
     #endregion
 
     #region Private methods
@@ -85,9 +86,21 @@ public class Database : IDatabase
         IPListChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    public void CreateIgnoreNetworkName(string name)
+    {
+        string Querry = $"INSERT INTO IgnoreList (Name)" +
+                        $"VALUES('{name}')";
+
+        WriteQuery(Querry);
+
+        //Trigger event for UI
+        IgnoreListChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     #endregion
 
     #region Get querries
+
     public List<IPv4Database> GetAllIPs()
     {
         List<IPv4Database> IPList = new();
@@ -120,6 +133,32 @@ public class Database : IDatabase
         return IPList;
     }
 
+    public List<string> GetIgnoreNames()
+    {
+        List<string> IgnoreList = new();
+        using (SQLiteConnection Db = new SQLiteConnection(DatabasePath))
+        {
+            Db.Open();
+
+            string Querry = $"SELECT * FROM IgnoreList";
+
+            using (SQLiteCommand cmd = new SQLiteCommand(Querry, Db))
+            {
+                using (SQLiteDataReader dataReader = cmd.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        if (dataReader.GetInt32(0) != 0)
+                        {
+                            IgnoreList.Add(dataReader.GetString(0));
+                        }
+                    }
+                }
+            }
+        }
+        return IgnoreList;
+    }
+
     #endregion
 
     #region Delete querries
@@ -133,6 +172,17 @@ public class Database : IDatabase
 
         //Trigger event so UI knows to reload list
         IPListChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void DeleteIgnoreListName(string name)
+    {
+        string Querry = $"DELETE FROM IgnoreList \n" +
+                        $"WHERE Name={name}";
+
+        WriteQuery(Querry);
+
+        //Trigger event so UI knows to reload list
+        IgnoreListChanged?.Invoke(this, EventArgs.Empty);
     }
 
     #endregion
