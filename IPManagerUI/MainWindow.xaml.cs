@@ -146,6 +146,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         NetworkChange.NetworkAddressChanged += new
         NetworkAddressChangedEventHandler(AddressChangedCallback);
 
+        _Database.DatabaseChanged += RepopulateIPList;
         _Database.IPListChanged += RepopulateIPList;
         _Database.IgnoreListChanged += RepopulateNICList;
     }
@@ -236,6 +237,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         IgnoreList = _Database.GetIgnoreNames();
         NICList = NetworkHelper.GetAllNetworkInterfaces(IgnoreList);
+        SelectedNic = NICList.FirstOrDefault()!;
     }
 
     #endregion
