@@ -50,13 +50,13 @@
             
             <StackPanel Orientation="Horizontal">
                 <ListView x:Name="IgnoreNICListView"
-                          Width="260" 
+                          Width="400" 
                           HorizontalAlignment="Left"
                           SelectionChanged="IgnoreNICListView_SelectionChanged"
                           ItemsSource="{Binding IgnoreList}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Name" Width="250"/>
+                            <GridViewColumn Header="Name" Width="390"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
