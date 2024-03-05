@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IPManagerUI.Windows"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="SettingsWindow" Height="450" Width="800"
+        Title="Settings" Height="450" Width="800"
         DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}"
 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
