@@ -50,14 +50,11 @@
             
             <StackPanel Orientation="Horizontal">
                 <ListView x:Name="IgnoreNICListView"
-                          Width="680" 
+                          Width="260" 
                           HorizontalAlignment="Left">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Description" Width="250" DisplayMemberBinding="{Binding Description}"/>
-                            <GridViewColumn Header="IP" Width="Auto" DisplayMemberBinding="{Binding IP}"/>
-                            <GridViewColumn Header="Subnetmask" Width="Auto" DisplayMemberBinding="{Binding SubnetMask}"/>
-                            <GridViewColumn Header="Default gateway" Width="Auto" DisplayMemberBinding="{Binding DefaultGateway}"/>
+                            <GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Name}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
