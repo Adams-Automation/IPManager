@@ -34,12 +34,25 @@
                                   Height="{Binding ActualHeight, ElementName=DescDarkThemeLabel, Mode=OneWay}"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBox x:Name="DatabaseLocationTextBlock"
-                                  Width="200"
-                                  Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"/>
+                                 Width="400"
+                                 Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"
+                                 IsReadOnly="True"/>
                         <Button x:Name="SearchDatabaseButton"
                                 Content="..."
                                 Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"
                                 Click="SearchDatabaseButton_Click"/>
+
+                        <Button x:Name="NewDatabaseButton"
+                                Margin="10 0 0 0"
+                                Content="New"
+                                Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"
+                                Click="NewDatabaseButton_Click"/>
+
+                        <Button x:Name="DefaultDatabaseButton"
+                                Margin="10 0 0 0"
+                                Content="Default"
+                                Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"
+                                Click="DefaultDatabaseButton_Click"/>
                     </StackPanel>
 
                 </StackPanel>

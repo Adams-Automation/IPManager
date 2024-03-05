@@ -2,6 +2,8 @@
 using IPManagerUI.Properties;
 using MaterialDesignThemes.Wpf;
 using System.ComponentModel;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 
 using MessageBox = System.Windows.MessageBox;
@@ -47,6 +49,9 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
         Database.IgnoreListChanged += RepopulateIgnoreList;
         
         IgnoreList = Database.GetIgnoreNames();
+
+        Database.DatabaseChanged += RepopulateIgnoreList;
+
     }
 
     private void InitializeDarkModeToggleButton()
@@ -139,4 +144,50 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
         else { RestoreButton.IsEnabled = false; }
     }
 
+    private void NewDatabaseButton_Click(object sender, RoutedEventArgs e)
+    {
+        // Create OpenFileDialog 
+        Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+
+        // Set filter for file extension and default file extension 
+        dlg.DefaultExt = ".db";
+        dlg.Filter = "Database File (*.db)|*.db";
+
+        // Display FileDialog by calling ShowDialog method 
+        Nullable<bool> result = dlg.ShowDialog();
+
+
+        // Get the selected file name and display in a TextBox 
+        if (result == true)
+        {
+            // Set document location
+            try
+            {
+                Database.CreateNewDatabase(dlg.FileName);
+
+                //Set UI to the correct connection string
+                DatabaseLocationTextBlock.Text=dlg.FileName;
+
+                //Save to user settings
+                UserSettings.Default.DatabaseLocation=dlg.FileName;
+                UserSettings.Default.Save();
+            } 
+            catch(Exception ex) { MessageBox.Show(ex.Message, "Error"); }
+        }
+    }
+
+    private void DefaultDatabaseButton_Click(object sender, RoutedEventArgs e)
+    {
+        string databaseLocation = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,
+                                        UserSettings.Default.DefaultDatabaseLocation);
+        //Set UI to the correct connection string
+        DatabaseLocationTextBlock.Text = databaseLocation;
+
+        //Save to user settings
+        UserSettings.Default.DatabaseLocation = databaseLocation;
+        UserSettings.Default.Save();
+
+        Database.SetDatabaseFilePath(databaseLocation);
+
+    }
 }
