@@ -112,7 +112,7 @@
                                 Width="100"
                                 VerticalAlignment="Top"
                                 Content="Ignore"
-                                Click="Ignore_click"/>
+                                Click="IgnoreButton_Click"/>
                         
                         <Button x:Name="SetIPAddresButton"
                                 Margin="0 10 0 0"

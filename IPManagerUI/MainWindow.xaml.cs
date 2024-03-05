@@ -323,7 +323,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         if (NetworkAdaptorComboBox.SelectedItem != null)
         {
-            _Database.CreateIgnoreNetworkName(NetworkAdaptorComboBox.SelectedItem.ToString());
+            _Database.CreateIgnoreNetworkName(SelectedNic.Name);
         }
     }
 
