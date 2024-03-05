@@ -51,10 +51,12 @@
             <StackPanel Orientation="Horizontal">
                 <ListView x:Name="IgnoreNICListView"
                           Width="260" 
-                          HorizontalAlignment="Left">
+                          HorizontalAlignment="Left"
+                          SelectionChanged="IgnoreNICListView_SelectionChanged"
+                          ItemsSource="{Binding IgnoreList}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Name" Width="250"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -62,7 +64,8 @@
                     <Button x:Name="RestoreButton"
                             Content="Restore"
                             Margin="10 20 0 0"
-                            Click="RestoreButton_Click"/>
+                            Click="RestoreButton_Click"
+                            ToolTip="Makes the selected nic back availabe in the dropdown box on the main screen."/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
