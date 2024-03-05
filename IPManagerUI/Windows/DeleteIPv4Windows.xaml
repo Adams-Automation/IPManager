@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IPManagerUI.Windows"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="AddIPv4Window" Height="200" Width="300"        
         DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}"
         
