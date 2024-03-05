@@ -87,37 +87,5 @@ namespace IPManagerUI
             base.OnExit(e);
         }
 
-        private void CheckUserSettings()
-        {
-            SetBaseTheme();
-            //SetDatabasePath();
-        }
-
-        private void SetBaseTheme()
-        {
-            var paletteHelper = new PaletteHelper();
-            //Retrieve the app's existing theme
-            var theme = paletteHelper.GetTheme();
-
-            if (UserSettings.Default.DarkTheme)
-            {
-                theme.SetBaseTheme(BaseTheme.Dark);
-            }
-            else
-            {
-                theme.SetBaseTheme(BaseTheme.Light);
-            }
-
-            //Change the app's current theme
-            paletteHelper.SetTheme(theme);
-        }
-
-        //private void SetDatabasePath(IDatabase database)
-        //{
-        //    if (UserSettings.Default.DatabaseLocation != UserSettings.Default.DefaultDatabaseLocation)
-        //    {
-        //        database.SetDatabaseFilePath(UserSettings.Default.DatabaseLocation);
-        //    }
-        //}
     }
 }

@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <None Remove="Resources\SplashPage.png" />
-    <None Remove="Windows\Email Footer.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,10 +63,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DatabaseLibrary\DatabaseLibrary.csproj" />
     <ProjectReference Include="..\NetworkInterfaceLibrary\NetworkInterfaceLibrary.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Windows\Email Footer.png" />
   </ItemGroup>
 
   <ItemGroup>

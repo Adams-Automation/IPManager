@@ -11,6 +11,8 @@ using IPManagerUI.Windows;
 
 using MessageBox = System.Windows.MessageBox;
 using System.Reflection;
+using IPManagerUI.Properties;
+using MaterialDesignThemes.Wpf;
 
 namespace IPManagerUI;
 
@@ -118,6 +120,9 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         //Set interfaces
         _Database = database;
 
+        //Check user settings
+        CheckUserSettings();
+
         //Populate variables
         NICList = NetworkHelper.GetAllNetworkInterfaces();
         SelectedNic = NICList.FirstOrDefault()!;
@@ -156,6 +161,12 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         ProcessInfo = "Done.";
     }
 
+    private void CheckUserSettings()
+    {
+        SetBaseTheme();
+        SetDatabasePath();
+    }
+
     private void NetworkAdaptorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         ProcessInfo = "Selecting interface.";
@@ -173,6 +184,33 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         }
 
         ProcessInfo = "Done.";
+    }
+
+    private void SetBaseTheme()
+    {
+        var paletteHelper = new PaletteHelper();
+        //Retrieve the app's existing theme
+        var theme = paletteHelper.GetTheme();
+
+        if (UserSettings.Default.DarkTheme)
+        {
+            theme.SetBaseTheme(BaseTheme.Dark);
+        }
+        else
+        {
+            theme.SetBaseTheme(BaseTheme.Light);
+        }
+
+        //Change the app's current theme
+        paletteHelper.SetTheme(theme);
+    }
+
+    private void SetDatabasePath()
+    {
+        if (UserSettings.Default.DatabaseLocation != UserSettings.Default.DefaultDatabaseLocation)
+        {
+            _Database.SetDatabaseFilePath(UserSettings.Default.DatabaseLocation);
+        }
     }
 
     private void RepopulateIPList(object? sender, EventArgs e)

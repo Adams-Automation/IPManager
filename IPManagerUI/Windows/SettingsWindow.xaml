@@ -26,9 +26,10 @@
                            Content="Database location : "
                            HorizontalAlignment="Right"/>
                 </StackPanel>
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical"
+                            Margin="10 0 0 0">
                    <ToggleButton x:Name="DarkModeToggleButton"
-                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Left"
                                   Click="DarkModeToggleButton_Pressed" 
                                   Height="{Binding ActualHeight, ElementName=DescDarkThemeLabel, Mode=OneWay}"/>
                     <StackPanel Orientation="Horizontal">
@@ -37,26 +38,36 @@
                                   Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"/>
                         <Button x:Name="SearchDatabaseButton"
                                 Content="..."
-                                  Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"/>
+                                Height="{Binding ActualHeight, ElementName=DescDatabaseLocationLabel, Mode=OneWay}"
+                                Click="SearchDatabaseButton_Click"/>
                     </StackPanel>
 
                 </StackPanel>
             </StackPanel>
             <Label x:Name="DescIgnoreListView"
-                   Content="Ignore following network interfaces : "
-                   Margin="0 20 0 0"/>
-            <ListView x:Name="IgnoreNICListView"
-                      Width="680" 
-                      HorizontalAlignment="Left">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Description" Width="250" DisplayMemberBinding="{Binding Description}"/>
-                        <GridViewColumn Header="IP" Width="Auto" DisplayMemberBinding="{Binding IP}"/>
-                        <GridViewColumn Header="Subnetmask" Width="Auto" DisplayMemberBinding="{Binding SubnetMask}"/>
-                        <GridViewColumn Header="Default gateway" Width="Auto" DisplayMemberBinding="{Binding DefaultGateway}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+                    Content="Ignore following network interfaces : "
+                    Margin="0 20 0 0"/>
+            
+            <StackPanel Orientation="Horizontal">
+                <ListView x:Name="IgnoreNICListView"
+                          Width="680" 
+                          HorizontalAlignment="Left">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Description" Width="250" DisplayMemberBinding="{Binding Description}"/>
+                            <GridViewColumn Header="IP" Width="Auto" DisplayMemberBinding="{Binding IP}"/>
+                            <GridViewColumn Header="Subnetmask" Width="Auto" DisplayMemberBinding="{Binding SubnetMask}"/>
+                            <GridViewColumn Header="Default gateway" Width="Auto" DisplayMemberBinding="{Binding DefaultGateway}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="RestoreButton"
+                            Content="Restore"
+                            Margin="10 20 0 0"
+                            Click="RestoreButton_Click"/>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

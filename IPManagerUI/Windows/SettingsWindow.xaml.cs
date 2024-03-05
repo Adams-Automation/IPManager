@@ -1,18 +1,7 @@
-﻿using IPManagerUI.Properties;
+﻿using DatabaseLibrary;
+using IPManagerUI.Properties;
 using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace IPManagerUI.Windows
 {
@@ -21,10 +10,15 @@ namespace IPManagerUI.Windows
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        public SettingsWindow()
+        public IDatabase Database { get; }
+
+        public SettingsWindow(IDatabase database)
         {
             InitializeComponent();
             InitializeDarkModeToggleButton();
+
+            DatabaseLocationTextBlock.Text = UserSettings.Default.DatabaseLocation;
+            Database = database;
         }
 
         private void InitializeDarkModeToggleButton()
@@ -62,6 +56,37 @@ namespace IPManagerUI.Windows
 
             //Change the app's current theme
             paletteHelper.SetTheme(theme);
+        }
+
+        private void RestoreButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SearchDatabaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".db";
+            dlg.Filter = "Database File (*.db)|*.db";
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Set document location
+                string filename = dlg.FileName;
+                DatabaseLocationTextBlock.Text = filename;
+                Database.SetDatabaseFilePath(filename);
+                UserSettings.Default.DatabaseLocation = filename;
+                UserSettings.Default.Save();
+            }
+
         }
     }
 }
