@@ -134,9 +134,9 @@ public partial class SettingsWindow : Window, INotifyPropertyChanged
     {
         if(IgnoreNICListView.SelectedItem != null)
         {
-            RestoreButton.IsEnabled = false;
+            RestoreButton.IsEnabled = true;
         }
-        else { RestoreButton.IsEnabled = true; }
+        else { RestoreButton.IsEnabled = false; }
     }
 
 }
