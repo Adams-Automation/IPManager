@@ -61,8 +61,6 @@ namespace IPManagerUI
             {
                 await AppHost!.StartAsync();
 
-                CheckUserSettings();
-
                 var startupForm = AppHost.Services.GetRequiredService<MainWindow>();
                 startupForm.Show();
 
