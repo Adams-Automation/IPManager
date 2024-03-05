@@ -15,6 +15,13 @@ public class Database : IDatabase
 
     public string DatabasePath { get; set; }
 
+    #region Events
+    public event EventHandler DatabaseChanged;
+    public event EventHandler IPListChanged;
+    public event EventHandler IgnoreListChanged;
+    #endregion
+
+
     #region Constructors
 
     public Database(IConfiguration configuration)
@@ -22,10 +29,10 @@ public class Database : IDatabase
         string? databasePath = configuration.GetConnectionString("DatabasePath");
         if (databasePath == null)
         {
-            databasePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!, "Resources",
+            databasePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,
                                         "IPManager.db");
         }
-        DatabasePath = $"Data Source={databasePath};Version=3;Compress=True;";
+        SetDatabasePath(databasePath);
     }
 
     public Database(IConfiguration configuration, ILogger<Database> logger) : this(configuration)
@@ -35,14 +42,9 @@ public class Database : IDatabase
 
     public Database(string databasePath)
     {
-        DatabasePath = $"Data Source={databasePath};Version=3;Compress=True;";
+        SetDatabasePath(databasePath);
     }
 
-    #endregion
-
-    #region Events
-    public event EventHandler IPListChanged;
-    public event EventHandler IgnoreListChanged;
     #endregion
 
     #region Private methods
@@ -70,6 +72,27 @@ public class Database : IDatabase
         }
     }
 
+    private void SetDatabasePath(string databasePath)
+    {
+        if(!File.Exists(databasePath))
+        {
+            Logger?.LogError("Database path does not exist.");
+            CreateNewDatabase(databasePath);
+        }
+        else if (Path.GetExtension(databasePath) != ".db")
+        {
+            Logger?.LogError("Database extension is incorrect.");
+            CreateNewDatabase(databasePath);
+        }else
+        {
+            Logger?.LogInformation($"Using following database : {databasePath}.");
+            DatabasePath = $"Data Source={databasePath};Version=3;Compress=True;";
+
+            //Push event when new database is set
+            DatabaseChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
     #endregion
 
     #region Public methods
@@ -82,7 +105,7 @@ public class Database : IDatabase
 
         WriteQuery(Querry);
 
-        //Trigger event so UI knows to reload list
+        //Trigger event so dependancies knows to reload list
         IPListChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -93,7 +116,7 @@ public class Database : IDatabase
 
         WriteQuery(Querry);
 
-        //Trigger event for UI
+        //Trigger event for dependancies
         IgnoreListChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -170,7 +193,7 @@ public class Database : IDatabase
 
         WriteQuery(Querry);
 
-        //Trigger event so UI knows to reload list
+        //Trigger event so dependancies knows to reload list
         IPListChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -181,7 +204,7 @@ public class Database : IDatabase
 
         WriteQuery(Querry);
 
-        //Trigger event so UI knows to reload list
+        //Trigger event so that dependancies knows to reload list
         IgnoreListChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -209,10 +232,31 @@ public class Database : IDatabase
 
     public void SetDatabaseFilePath(string path)
     {
-        DatabasePath = $"Data Source={path};Version=3;Compress=True;";
+        SetDatabasePath(path);
 
         //Trigger event so UI knows to reload list
         IPListChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void CreateNewDatabase(string path)
+    {
+        //Check if the extension is correct, if not add extension to the file
+        if (Path.GetExtension(path) != ".db") { Path.ChangeExtension(path, ".db"); }
+
+        //Delete existing file so that the new file can be copied to the existing location
+        if(File.Exists(path)) { File.Delete(path);}
+
+        //Copy the local empty database
+        File.Copy(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,
+                               "Resources",
+                               "IPManager.db"), 
+                  path);
+
+        //Set database path
+        DatabasePath = $"Data Source={path};Version=3;Compress=True;";
+
+        //Trigger event so dependancies know that the database is changed
+        DatabaseChanged?.Invoke(this, EventArgs.Empty);
     }
     
     #endregion

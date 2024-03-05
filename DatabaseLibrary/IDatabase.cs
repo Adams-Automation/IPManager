@@ -16,10 +16,12 @@ namespace DatabaseLibrary
         List<string> GetIgnoreNames();
 
         void SetDatabaseFilePath(string path);
+        void CreateNewDatabase(string path);
 
         void UpdateIPSettings(IPv4Database IPv4Database);
 
         //Events
+        event EventHandler DatabaseChanged;
         event EventHandler IPListChanged;
         event EventHandler IgnoreListChanged;
     }
