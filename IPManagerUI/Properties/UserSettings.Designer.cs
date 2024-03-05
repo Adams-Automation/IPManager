@@ -37,7 +37,7 @@ namespace IPManagerUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("./IPManager.db")]
+        [global::System.Configuration.DefaultSettingValueAttribute("IPManager.db")]
         public string DatabaseLocation {
             get {
                 return ((string)(this["DatabaseLocation"]));
