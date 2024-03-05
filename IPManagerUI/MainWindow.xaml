@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:IPManagerUI"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="600" Width="800" 
+        Title="IP Manager" Height="600" Width="800" 
         DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
