@@ -65,7 +65,7 @@
         <StackPanel x:Name="NetworkInfoStackPanel" Orientation="Horizontal">
             <StackPanel x:Name="DescriptionStackPanel" Orientation="Vertical"
                         HorizontalAlignment="Right">
-                <Label x:Name="DescNetworkAdaptorLabel" Content="Network adaptor :"
+                <Label x:Name="DescNetworkAdaptorLabel" Content="Network adapter :"
                         HorizontalAlignment="Right"/>
                 <Label x:Name="DescNameLabel" Content="Name :"
                        HorizontalAlignment="Right"/>
