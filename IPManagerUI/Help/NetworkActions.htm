@@ -1,11 +1,37 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <HTML>
-<HEAD>
-<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
-<Title>Network Actions</Title>
-</HEAD>
-<BODY>
+    <HEAD>
+        <meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+        <Title>Network Actions</Title>
+    </HEAD>
+    <BODY>
+        <h1>Network Actions</h1>
+        <p>There are 3 actions we can perform on an network adapter.</p>
+        <ol type="1">
+            <li>Ignore the network adapter</li>
+            <li>Set IP to the network adapter</li>
+            <li>Set the network adapter to DHCP</li>
+        </ol>
+        <img src="Images/DHCP is set.png"/>
 
+        <h4>Ignore the network adapter</h4>
+        <p>
+            This means that the network adapter won't show up in list any more and will be ignored.<br />
+            Also in the future this adapter won't show up.
+            If by mistake this network adapter is ignored, then you can always restore this adapter back into the list.<br />
+            This can be done in the settings page.
+        </p>
 
-</BODY>
+        <h4>Set IP to the network adapter</h4>
+        <p>
+            After selecting an IP address from the list the IP settings can be set to the network adapter.<br />
+            By pressing the button a netsh command will be executed to set the IP settings to the correct adapter.
+        </p>
+        
+        <h4>Set the network adapter to DHCP</h4>
+        <p>
+            When this selection is made the network adapter will be set to dhcp mode.<br />
+            This means that the computer can receive it's IP settings from a dhcp-server.
+        </p>
+    </BODY>
 </HTML>
