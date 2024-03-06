@@ -13,6 +13,18 @@
 		<param name="Local" value="Home.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Network Info">
+		<param name="Local" value="NetworkInfo.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Network Actions">
+		<param name="Local" value="NetworkActions.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Stored IP's">
+		<param name="Local" value="StoredIPs.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Settings">
 		<param name="Local" value="Settings.htm">
 		</OBJECT>
