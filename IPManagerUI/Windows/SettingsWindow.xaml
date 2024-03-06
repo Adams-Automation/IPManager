@@ -64,7 +64,7 @@
             
             <StackPanel Orientation="Horizontal">
                 <ListView x:Name="IgnoreNICListView"
-                          Width="400" 
+                          Width="410" 
                           HorizontalAlignment="Left"
                           SelectionChanged="IgnoreNICListView_SelectionChanged"
                           ItemsSource="{Binding IgnoreList}">
