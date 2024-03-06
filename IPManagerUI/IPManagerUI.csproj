@@ -70,7 +70,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Help\" />
+    <Folder Include="Help\Images\" />
   </ItemGroup>
 
 </Project>
