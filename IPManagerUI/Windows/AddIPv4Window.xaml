@@ -86,7 +86,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom">
             <Button x:Name="CreateButton"
-                    Content="Create"
+                    Content="Add"
                     Width="100"
                     Click="CreateButton_Click"/>
             <Button x:Name="CancelButton"
