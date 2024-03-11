@@ -19,12 +19,45 @@
         <StackPanel x:Name="EditIPStackPanel" Orientation="Horizontal"
                     Margin="10">
             <StackPanel x:Name="DescriptionStackPanel" Orientation="Vertical">
-                <Label x:Name="DescDescriptionLabel" Content="Description :"
-                       HorizontalAlignment="Right"/>
-                <Label x:Name="DescIPAddressLabel" Content="IP address :"
-                       HorizontalAlignment="Right"/>
-                <Label x:Name="DescSubnetMaskLabel" Content="Subnet mask :"
-                       HorizontalAlignment="Right"/>
+                <Label x:Name="DescDescriptionLabel"
+                       HorizontalAlignment="Right">
+                    <Label.Content>
+                        <TextBlock>
+                            <materialDesign:PackIcon Kind="Asterisk" Foreground="DarkRed" 
+                                                     Height="10" Width="10" 
+                                                     VerticalAlignment="Top" 
+                                                     Margin="0 0 0 2"
+                                                     HorizontalAlignment="Right"/>
+                            <TextBlock.Text>Description :</TextBlock.Text>
+                        </TextBlock>
+                    </Label.Content>                    
+                </Label>
+                <Label x:Name="DescIPAddressLabel"
+                       HorizontalAlignment="Right">
+                    <Label.Content>
+                        <TextBlock>
+                            <materialDesign:PackIcon Kind="Asterisk" Foreground="DarkRed" 
+                                                     Height="10" Width="10" 
+                                                     VerticalAlignment="Top" 
+                                                     Margin="0 0 0 2"
+                                                     HorizontalAlignment="Right"/>
+                            <TextBlock.Text>IP address :</TextBlock.Text>
+                        </TextBlock>
+                    </Label.Content>
+                </Label>
+                <Label x:Name="DescSubnetMaskLabel"
+                       HorizontalAlignment="Right">
+                    <Label.Content>
+                        <TextBlock>
+                            <materialDesign:PackIcon Kind="Asterisk" Foreground="DarkRed" 
+                                                     Height="10" Width="10" 
+                                                     VerticalAlignment="Top" 
+                                                     Margin="0 0 0 2"
+                                                     HorizontalAlignment="Right"/>
+                            <TextBlock.Text>Subnet mask :</TextBlock.Text>
+                        </TextBlock>
+                    </Label.Content>                    
+                </Label>
                 <Label x:Name="DescDefaultGatewayLabel" Content="Default gateway :"
                        HorizontalAlignment="Right"/>
             </StackPanel>

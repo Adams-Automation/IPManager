@@ -48,7 +48,9 @@ public partial class EditIPv4Window : Window, INotifyPropertyChanged
     {
         try
         {
-            if (IPv4Database.Description != string.Empty && IPv4Database.IP != string.Empty)
+            if (IPv4Database.Description != string.Empty &&
+                IPv4Database.IP != string.Empty &&
+                IPv4Database.SubnetMask != string.Empty)
             {
                 Database.UpdateIPSettings(IPv4Database);
             }
